@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>speccar</title>
+
+    <link href="speccar.css" rel="stylesheet" />
+    <script src="speccar.js"></script>
+</head>
+<body>
+    <div class="speccar fragment" style="overflow:scroll">
+        <header class="page-header" aria-label="Header content" role="banner">
+            <button class="back-button" data-win-control="WinJS.UI.BackButton"></button>
+            <h1 class="titlearea win-type-ellipsis">
+                <span id="pagetitle" class="pagetitle"></span>
+            </h1>
+        </header>
+        <section class="page-section" aria-label="Main content" role="main">
+            <button id="homeButton">Home</button><button id="logoutButton">Logout</button>
+            <h2>Add Fill Up:</h2>
+            Date: <input id="dateInput" type="text" />
+            Distance: <input id="distanceInput" type="text" />
+            Fuel Used: <input id="fuelusedInput" type="text" />
+            <button id="addFillUp">Add New Fill Up</button><div id="error"></div>
+            <div id="loc_status"></div>
+            <div id="output"></div>
+            <br />
+            <h2>Fill Ups:</h2>
+            <p></p>
+            <div id="fillupList"></div>
+        </section>
+    </div>
+</body>
+</html>
