@@ -8,17 +8,14 @@
         // populates the page elements with the app's data.
         ready: function (element, options) {
             // TODO: Initialize the page here.
-
-
+            
             var client = new Windows.Web.Http.HttpClient();
-
             var url = "http://fleetmgr2212.appspot.com/carModel";
 
             client.getAsync(new Windows.Foundation.Uri(url)).done(function (result) {
 
                 var jsonResult = JSON.parse(result.content.toString());
 
-                
                 for (var i in jsonResult.carModels) {
 
                     var out = jsonResult.carModels[i].year.toString() + ' ' + jsonResult.carModels[i].make.toString() + ' '
@@ -31,12 +28,7 @@
                     out += '<br><br>';
 
                     document.getElementById("allcarsList").innerHTML += out;
-
-
                 }
-                
-               
-
             });
         },
 
@@ -46,7 +38,6 @@
 
         updateLayout: function (element) {
             /// <param name="element" domElement="true" />
-
             // TODO: Respond to changes in layout.
         }
     });
