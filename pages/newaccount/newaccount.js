@@ -9,10 +9,6 @@
         ready: function (element, options) {
             // TODO: Initialize the page here.
 
-
-
-
-
             var signUpButton = document.getElementById("signUpButton");
             signUpButton.addEventListener("click", this.signUpButtonClickHandler, false);
         },
@@ -20,24 +16,19 @@
         signUpButtonClickHandler: function (eventInfo) {
 
             document.getElementById("output").innerHTML = "";
-
             var nameInput = document.getElementById("nameInput").value;
             var emailInput = document.getElementById("emailInput").value;
             var usernameInput = document.getElementById("usernameInput").value;
             var passwordInput = document.getElementById("passwordInput").value;
-
             var usernameTaken = false;
-
-            // Ensure username is unique
-
             var client = new Windows.Web.Http.HttpClient();
-
             var uri = "http://fleetmgr2212.appspot.com/user";
 
             client.getAsync(new Windows.Foundation.Uri(uri)).done(function (result) {
 
                 var jsonResult = JSON.parse(result.content.toString());
-
+    
+                // Ensure username is unique
                 for (var i in jsonResult.users) {
                     if (jsonResult.users[i].username == usernameInput) {
                         usernameTaken = true;
@@ -47,8 +38,7 @@
                 if (usernameTaken) {
                     document.getElementById("output").innerHTML = "Sorry, that username is already taken.";
                 } else {
-                    //document.getElementById("output").innerHTML = "unique username";
-
+                    
                     //create account
                     var payload = "username=" + usernameInput + "&name=" + nameInput + "&password=" + passwordInput + "&email=" + emailInput;
 
@@ -56,19 +46,10 @@
 
                         document.getElementById("output").innerText = "Successfully created account! Please login.";
                         setTimeout(function () { WinJS.Navigation.navigate('/pages/login/login.html'); }, 3000);
-                        //WinJS.Navigation.navigate('/pages/login/login.html');
                        
                     });
-
                 }
             });
-
-            
-
-
-            
-
-
         },
 
         unload: function () {
