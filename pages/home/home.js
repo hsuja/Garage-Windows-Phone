@@ -5,8 +5,6 @@
         // This function is called whenever a user navigates to this page. It
         // populates the page elements with the app's data.
 
-        
-
         ready: function (element, options) {
             // TODO: Initialize the page here.
             document.getElementById("pagetitle").innerHTML = "";
@@ -14,13 +12,9 @@
             var uid = WinJS.Application.sessionState.uid;
             
             var tempthis = this;
-
             document.getElementById("pagetitle").innerHTML = username + "'s Garage";
-
             var client = new Windows.Web.Http.HttpClient();
-
             var url = "http://fleetmgr2212.appspot.com/user/" + uid + "/specCar";
-
 
             if (uid == null) {
                 WinJS.Navigation.navigate('/pages/login/login.html');
@@ -46,7 +40,6 @@
 
                         document.getElementById("carList").innerHTML += out;
 
-
                     }
 
                     WinJS.Utilities.query("button.view").listen("click", tempthis.viewClickHandler, false);
@@ -62,7 +55,6 @@
                     }, false);
 
                 });
-
             }
 
             var addCarButton = document.getElementById("addCarButton");
@@ -72,8 +64,7 @@
         addCarClickHandler: function (eventInfo) {
 
             document.getElementById("error").innerHTML = "";
-            
-           
+        
             var year = document.getElementById("yearInput").value;
             var make = document.getElementById("makeInput").value;
             var model = document.getElementById("modelInput").value;
@@ -83,28 +74,20 @@
                 document.getElementById("error").innerHTML = "Error: All fields must be nonempty.";
 
             } else {
-
-
-
+                
                 // Add new specCar to API
-
-
                 var client = new Windows.Web.Http.HttpClient();
                 var payload = "year=" + year + "&make=" + make + "&model=" + model;
 
-                //var uri = "http://fleetmgr2212.appspot.com/user/5707702298738688/specCar/" + WinJS.Application.sessionState.sid.toString() + "/fillUp";
                 var uri = "http://fleetmgr2212.appspot.com/user/" + WinJS.Application.sessionState.uid.toString() + "/specCar";
 
                 client.postAsync(new Windows.Foundation.Uri(uri), Windows.Web.Http.HttpStringContent(payload, Windows.Storage.Streams.UnicodeEncoding.utf8, 'application/x-www-form-urlencoded')).done(function (result) {
 
                     document.getElementById("output").innerText = "Successfully added a car!";
-                    //setTimeout(function () { WinJS.Navigation.navigate('/pages/home/home.html'); }, 1000);
                     
-
                     client.getAsync(new Windows.Foundation.Uri(uri)).done(function (result) {
 
                         var jsonResult = JSON.parse(result.content.toString());
-
                         document.getElementById("carList").innerHTML = "";
 
                         for (var i in jsonResult.specCars) {
@@ -117,13 +100,9 @@
                             }
 
                             out += '<br><button class="view" id="' + jsonResult.specCars[i].key.toString() + '">View</button><br>';
-
                             document.getElementById("carList").innerHTML += out;
-
-
                         }
 
-                        
                         WinJS.Utilities.query("button.view").listen("click", function (eventInfo) {
                             var key = this.id;
                             WinJS.Application.sessionState.sid = key;
@@ -132,13 +111,8 @@
 
                     });
                 });
-
-
             }
-
         },
-
-
 
         viewClickHandler: function (eventInfo) {
 
@@ -147,6 +121,5 @@
             WinJS.Navigation.navigate('/pages/speccar/speccar.html');
 
         },
-        
     });
 })();
