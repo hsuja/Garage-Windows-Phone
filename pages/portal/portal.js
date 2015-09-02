@@ -9,11 +9,9 @@
         ready: function (element, options) {
             // TODO: Initialize the page here.
 
-
             if (WinJS.Application.sessionState.uid == null) {
                 WinJS.Navigation.navigate('/pages/login/login.html');
             }
-
 
             var userCarsButton = document.getElementById("userCarsButton");
             userCarsButton.addEventListener("click", this.userCarsButtonClickHandler, false);
@@ -32,9 +30,6 @@
             }, false);
         },
 
-
-
-
         userCarsButtonClickHandler: function (eventInfo) {
   
             WinJS.Navigation.navigate('/pages/home/home.html');
@@ -52,9 +47,6 @@
             WinJS.Navigation.navigate('/pages/updateaccount/updateaccount.html');
 
         },
-
-
-
 
         unload: function () {
             // TODO: Respond to navigations away from this page.
