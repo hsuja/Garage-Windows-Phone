@@ -24,22 +24,17 @@
             updateButton.addEventListener("click", this.updateButtonClickHandler, false);
         },
 
-
         updateButtonClickHandler: function (eventInfo) {
 
             document.getElementById("output").innerHTML = "";
-
             var uid = WinJS.Application.sessionState.uid;
 
             var new_nameInput = document.getElementById("new_nameInput").value;
             var new_emailInput = document.getElementById("new_emailInput").value;
-            //var old_passwordInput = document.getElementById("old_passwordInput").value;
             var new_passwordInput = document.getElementById("new_passwordInput").value;
 
             var client = new Windows.Web.Http.HttpClient();
-
             var uri = "http://fleetmgr2212.appspot.com/user/" + uid;
-
             var payload = "";
 
             if (new_nameInput != "") {
@@ -59,17 +54,11 @@
                 }
                 payload += "newPass=" + new_passwordInput;
             }
-
-
-
-            //var payload = "newName=" + new_nameInput + "&newEmail=" + new_emailInput + "&newPass=" + new_passwordInput;
+            
             if (payload != "") {
                 client.putAsync(new Windows.Foundation.Uri(uri), Windows.Web.Http.HttpStringContent(payload, Windows.Storage.Streams.UnicodeEncoding.utf8, 'application/x-www-form-urlencoded')).done(function (result) {
-
                     document.getElementById("output").innerText = "Updated user profile!";
                     setTimeout(function () { WinJS.Navigation.navigate('/pages/portal/portal.html'); }, 500);
-                    //WinJS.Navigation.navigate('/pages/login/login.html');
-
                 });
             } else {
                 document.getElementById("output").innerText = "No changes made.";
@@ -77,15 +66,12 @@
             
         },
 
-
-
         unload: function () {
             // TODO: Respond to navigations away from this page.
         },
 
         updateLayout: function (element) {
             /// <param name="element" domElement="true" />
-
             // TODO: Respond to changes in layout.
         }
     });
