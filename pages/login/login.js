@@ -19,13 +19,9 @@
         signInClickHandler: function (eventInfo) {
 
             document.getElementById("signInOutput").innerHTML = "";
-
             var usernameInput = document.getElementById("usernameInput").value;
             var passwordInput = document.getElementById("passwordInput").value;
-
             var authenticated = false;
-
-          
             var client = new Windows.Web.Http.HttpClient();
 
             client.getAsync(new Windows.Foundation.Uri("http://fleetmgr2212.appspot.com/user")).done(function (result) {
@@ -39,16 +35,12 @@
                         //save user key and username in session
                         WinJS.Application.sessionState.uid = jsonResult.users[i].key;
                         WinJS.Application.sessionState.username = jsonResult.users[i].username;
-
-                        
                     }
-
-
+                    
                 }
               
                 if (authenticated) {
                     document.getElementById("signInOutput").innerHTML = "user authenticated";
-
                     //Navigate to Page
                     WinJS.Navigation.navigate('/pages/portal/portal.html');
 
@@ -57,15 +49,10 @@
                 }
 
             });
-
-
         },
 
         createAccountClickHandler: function (eventInfo) {
-
             WinJS.Navigation.navigate('/pages/newaccount/newaccount.html');
-
-
         },
 
         unload: function () {
